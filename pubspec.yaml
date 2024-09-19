@@ -1,0 +1,66 @@
+name: circle_land
+description: "circle_land"
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.2
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Routing
+  go_router:
+  go_router_builder:
+
+  # State Management
+  flutter_riverpod:
+  riverpod_annotation:
+
+  # REST API
+  dio:
+  talker_dio_logger:
+  retrofit:
+
+  # Modeling
+  json_annotation:
+  freezed:
+  dartz:
+  equatable:
+
+  # Debounce/Throttle
+  easy_debounce:
+  debounce_throttle:
+
+  # DI
+  get_it:
+
+  # SVG
+  flutter_svg:
+  flutter_svg_provider:
+
+  # Utility
+  velocity_x:
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+  riverpod_lint:
+
+  analyzer:
+  analyzer_plugin:
+  build_runner:
+  riverpod_generator:
+  retrofit_generator:
+  json_serializable:
+
+
+flutter:
+  uses-material-design: true
