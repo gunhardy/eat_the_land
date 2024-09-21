@@ -1,3 +1,7 @@
+# APIs
+**/secret.properties
+**/Key.xcconfig
+
 # Miscellaneous
 *.class
 *.log

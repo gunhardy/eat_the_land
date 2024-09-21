@@ -39,6 +39,9 @@ dependencies:
   # DI
   get_it:
 
+  # Map
+  google_maps_flutter:
+
   # SVG
   flutter_svg:
   flutter_svg_provider:

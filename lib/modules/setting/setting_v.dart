@@ -22,10 +22,7 @@ class _SettingViewState extends ConsumerState<SettingView> {
           onHorizontalDragEnd: (details) {
             if (details.primaryVelocity! > 0) ref.read(routerProvider).pushReplacementNamed(PAGE.PLAY.name);
           },
-          child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: 'SETTING_VIEW'.text.make()
-          ),
+          child: 'SETTING_VIEW'.text.make().p(20),
         ),
       ),
     );

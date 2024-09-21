@@ -13,21 +13,19 @@ class PlayView extends ConsumerStatefulWidget {
 }
 
 class _PlayViewState extends ConsumerState<PlayView> {
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: context.colors.primary,
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: GestureDetector(
-            onHorizontalDragEnd: (details) {
-              if (details.primaryVelocity == null) return;
-              if (details.primaryVelocity! > 0) ref.read(routerProvider).pushReplacementNamed(PAGE.RANK.name);
-              if (details.primaryVelocity! < 0) ref.read(routerProvider).pushReplacementNamed(PAGE.SETTING.name);
-            },
-            child: 'PLAY_VIEW'.text.make(),
-          ),
+        child: GestureDetector(
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity == null) return;
+            if (details.primaryVelocity! > 0) ref.read(routerProvider).pushReplacementNamed(PAGE.RANK.name);
+            if (details.primaryVelocity! < 0) ref.read(routerProvider).pushReplacementNamed(PAGE.SETTING.name);
+          },
+          child: 'PLAY_VIEW'.text.make().p(20),
         ),
       ),
     );
