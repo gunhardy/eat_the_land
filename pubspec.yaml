@@ -42,7 +42,8 @@ dependencies:
   # Map
   google_maps_flutter:
 
-  # SVG
+  # Image
+  image:
   flutter_svg:
   flutter_svg_provider:
 
