@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum PAGE {
   PLAY('/', 'play'),
+  MAP('/map', 'map'),
   LOGIN('/login', 'login'),
   RANK('/rank', 'rank'),
   SETTING('/setting', 'setting');

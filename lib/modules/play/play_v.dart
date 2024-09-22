@@ -25,7 +25,10 @@ class _PlayViewState extends ConsumerState<PlayView> {
             if (details.primaryVelocity! > 0) ref.read(routerProvider).pushReplacementNamed(PAGE.RANK.name);
             if (details.primaryVelocity! < 0) ref.read(routerProvider).pushReplacementNamed(PAGE.SETTING.name);
           },
-          child: 'PLAY_VIEW'.text.make().p(20),
+          child:  IconButton(
+            onPressed: () => ref.read(routerProvider).pushReplacementNamed(PAGE.MAP.name),
+            icon: Icon(Icons.abc, size: 50, color: Colors.red),
+          ),
         ),
       ),
     );

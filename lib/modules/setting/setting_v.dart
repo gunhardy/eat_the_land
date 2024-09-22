@@ -20,7 +20,7 @@ class _SettingViewState extends ConsumerState<SettingView> {
       child: SafeArea(
         child: GestureDetector(
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity! > 0) ref.read(routerProvider).pushReplacementNamed(PAGE.PLAY.name);
+            if (details.primaryVelocity! > 0) ref.read(routerProvider).pushReplacementNamed(PAGE.MAP.name);
           },
           child: 'SETTING_VIEW'.text.make().p(20),
         ),

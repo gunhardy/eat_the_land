@@ -41,6 +41,7 @@ dependencies:
 
   # Map
   google_maps_flutter:
+  location:
 
   # Image
   image:

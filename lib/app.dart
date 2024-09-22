@@ -17,10 +17,10 @@ class _AppState extends ConsumerState<App> {
   Widget build(BuildContext context) {
     final routerConfig = ref.watch(routerProvider);
 
-    return MaterialApp(
-      theme: CircleLandTheme.themeData,
-      home: MapView(),
-    );
+    // return MaterialApp(
+    //   theme: CircleLandTheme.themeData,
+    //   home: MapView(),
+    // );
 
     return MaterialApp.router(
       builder: (context, child) => child!,

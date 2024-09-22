@@ -1,4 +1,5 @@
 import 'package:circle_land/core/router/page.dart';
+import 'package:circle_land/modules/map/map_v.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -25,6 +26,19 @@ GoRouter router(RouterRef ref) {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const PlayView(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return _buildTransition(context, animation, secondaryAnimation, child);
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: PAGE.MAP.path,
+        name: PAGE.MAP.name,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const MapView(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return _buildTransition(context, animation, secondaryAnimation, child);
             },
