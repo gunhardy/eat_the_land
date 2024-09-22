@@ -31,8 +31,6 @@ class MarkerUtils {
         }
       }
     } catch (e) {
-      debugPrint('$e');
-
       return BitmapDescriptor.defaultMarker;
     }
 

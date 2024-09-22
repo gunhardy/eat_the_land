@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -18,8 +19,13 @@ class MapView extends ConsumerStatefulWidget {
 }
 
 class _MapViewState extends ConsumerState<MapView> {
+  // MODE
   bool isFixMode = true;
+
+  // CONTROLLER
   Completer<GoogleMapController> _controller = Completer();
+
+  // CIRCLE
   Set<Circle> _circles = {
     Circle(
       circleId: CircleId('left'),
@@ -54,17 +60,28 @@ class _MapViewState extends ConsumerState<MapView> {
       strokeWidth: 2,
     ),
   };
+
+  // MARKER
   Set<Marker> _markers = {};
+
+  // LOCATION
   Location _location = Location();
   StreamSubscription<LocationData>? _locationSubscription;
   bool _serviceEnabled = false;
   late PermissionStatus _permissionGranted;
+
+  // STYLE
+  late String _retroMapStyle;
+  late String _nightMapStyle;
 
   @override
   void initState() {
     super.initState();
     _checkLocation();
     _addMarker();
+
+    rootBundle.loadString('assets/map/retro.json').then((style) => _retroMapStyle = style);
+    rootBundle.loadString('assets/map/night.json').then((style) => _nightMapStyle = style);
   }
 
   Future<void> _checkLocation() async {
@@ -142,10 +159,6 @@ class _MapViewState extends ConsumerState<MapView> {
   Widget build(BuildContext context) {
     final LatLng _center = const LatLng(37.3948, 127.1112);
 
-    void _onMapCreated(GoogleMapController controller) {
-      _controller.complete(controller);
-    }
-
     return Material(
       color: context.colors.primary,
       child: Stack(
@@ -153,7 +166,7 @@ class _MapViewState extends ConsumerState<MapView> {
           IgnorePointer(
             ignoring: isFixMode,
             child: GoogleMap(
-              onMapCreated: _onMapCreated,
+              onMapCreated: (controller) => _controller.complete(controller),
               zoomControlsEnabled: false,
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
@@ -192,10 +205,28 @@ class _MapViewState extends ConsumerState<MapView> {
             SafeArea(
               child: Align(
                 alignment: Alignment.topRight,
-                child: IconButton(
-                  onPressed: () async =>
-                      _controller.future.then((controller) => controller.animateCamera(CameraUpdate.zoomOut())),
-                  icon: Icon(Icons.account_box_sharp, size: 40, color: Colors.black),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () async => _controller.future.then((value) {
+                        value.setMapStyle('');
+                      }),
+                      icon: Icon(Icons.format_color_reset_outlined, size: 40, color: Colors.black),
+                    ),
+                    IconButton(
+                      onPressed: () async => _controller.future.then((value) {
+                        value.setMapStyle(_retroMapStyle);
+                      }),
+                      icon: Icon(Icons.color_lens_outlined, size: 40, color: Colors.black),
+                    ),
+                    IconButton(
+                      onPressed: () async => _controller.future.then((value) {
+                        value.setMapStyle(_nightMapStyle);
+                      }),
+                      icon: Icon(Icons.color_lens, size: 40, color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -224,8 +255,6 @@ class _MapViewState extends ConsumerState<MapView> {
               child: IconButton(
                 onPressed: () => setState(() {
                   isFixMode = !isFixMode;
-
-                  debugPrint('isFixMode => $isFixMode');
                 }),
                 icon: Icon(Icons.map_outlined, size: 40, color: Colors.black),
               ),
